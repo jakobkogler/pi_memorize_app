@@ -1,26 +1,58 @@
+#:kivy 1.9.1
+
 <RootWidget>:
-#This is the root widget's kv definition
-    manager: manager
-    ActionBar:
-        id: _action
-        size_hint: 1,0.1
-        pos_hint: {'top':1}
-        ActionView:
-            use_separator: True
-            ActionPrevious:
-                title: 'Previous Slide'
-                with_previous: False
-                on_release: root.manager.current = root.manager.previous()
+    id: rootWidget
+    fullscreen: True
 
-    ScreenManager:
-        id: manager
-        pos_hint: {'top': 0.9}
-        Screen:
-            name: 'Screen 1'
-            Label:
-                text: 'Screen 1'    
+    BoxLayout:
+        orientation: 'vertical'
 
-        Screen:
-            name: 'Screen 2'
-            Label:
-                text: 'Screen 2'
+        BoxLayout:
+            height: '40dp'
+            size_hint: 1, .2
+
+            ToggleButton:
+                id: tb_learn
+                text: 'Learn Pi'
+                group: 'modus'
+                state: 'down'
+                size_hint: .5, 1
+                on_press: sm.current = 'learn_screen'
+
+            ToggleButton:
+                id: tb_recite
+                text: 'Recite Pi'
+                group: 'modus'
+                size_hint: .5, 1
+                on_press: sm.current = 'recite_screen'
+
+        ScreenManager:
+            id: sm
+
+            Screen:
+                name: 'learn_screen'
+                canvas.before:
+                    Color:
+                        rgb: .8, .2, .2
+                        Rectangle:
+                            size: self.size
+
+                AnchorLayout:
+                    Label:
+                        size_hint: None, None
+                        size: '150dp', '48dp'
+                        text: 'Pi = 3.141592...'
+
+            Screen:
+                name: 'recite_screen'
+                canvas.before:
+                    Color:
+                        rgb: .2, .8, .2
+                        Rectangle:
+                            size: self.size
+
+                AnchorLayout:
+                    Label:
+                        size_hint: None, None
+                        size: '150dp', '48dp'
+                        text: "What's the 10th digit of Pi?"
