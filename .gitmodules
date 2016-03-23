@@ -1,0 +1,3 @@
+[submodule "pi_memorize"]
+	path = pi_memorize
+	url = https://github.com/jakobkogler/pi_memorize
