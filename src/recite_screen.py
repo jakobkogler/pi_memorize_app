@@ -63,6 +63,7 @@ class ReciteScreen(Screen):
         self.reciter.reset()
         self.update_correct_digits()
         self.update_wrong_attempts()
+        self.pi_output = '' # for reseting the cursor!
         self.pi_output = '3.'
 
 
