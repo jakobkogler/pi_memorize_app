@@ -24,7 +24,8 @@ class ReciteScreen(Screen):
 
 
 class MainApp(App):
-    def build(self):
+    @staticmethod
+    def build():
         return RootWidget()
 
 
