@@ -8,7 +8,7 @@ class Reciter:
         self.pos = 0
         self.compute_pi(100)
 
-    def reset():
+    def reset(self):
         self.pos = 0
 
     def check_next_digit(self, digit):
@@ -17,7 +17,7 @@ class Reciter:
             if self.pos == self.current_calculated:
                 self.compute_pi(self.current_calculated + 100)
             return True
-            
+
         return False
 
     def compute_pi(self, count):
