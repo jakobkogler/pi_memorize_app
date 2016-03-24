@@ -11,7 +11,7 @@ class Reciter:
         self.pi = ''
         self.pos = 0
         self.errors = 0
-        self.compute_pi(100)
+        self.compute_pi(150)
 
     def reset(self):
         """Sets the number of correct digit and of the errors back to zero."""
@@ -23,7 +23,7 @@ class Reciter:
         if digit == self.pi[self.pos]:
             self.pos += 1
             if self.pos == self.current_calculated:
-                self.compute_pi(self.current_calculated + 100)
+                self.compute_pi(self.current_calculated + 150)
             return True
         else:
             self.errors += 1
