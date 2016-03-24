@@ -98,6 +98,13 @@
         Label:
             text: ''
 
+
 <DigitButton@Button>:
     on_press: self.parent.parent.digit_pressed(self.text)
     font_size: self.height * .4
+
+
+<WrongDigitImage@Image>:
+    size_hint: 0, 0
+    pos_hint: {'center_x': .5, 'center_y': .5}
+    source: 'X.png'
