@@ -23,11 +23,11 @@ class ReciteScreen(Screen):
         self.update_correct_digits()
 
     def digit_pressed(self, digit):
-        if self.reciter.check_next_digit(digit):
-            self.pi_output += digit
-            self.update_correct_digits()
-        else:
-            if not self.image:
+        if not self.image:
+            if self.reciter.check_next_digit(digit):
+                self.pi_output += digit
+                self.update_correct_digits()
+            else:
                 self.image = WrongDigitImage()
                 self.add_widget(self.image)
                 self.animate_grow(self.image)
