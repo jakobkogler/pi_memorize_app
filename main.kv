@@ -15,7 +15,6 @@
                 id: tb_learn
                 text: 'Learn Pi'
                 group: 'modus'
-                state: 'down'
                 size_hint: .5, 1
                 on_press: sm.current = 'learn_screen'
 
@@ -23,6 +22,7 @@
                 id: tb_recite
                 text: 'Recite Pi'
                 group: 'modus'
+                state: 'down'
                 size_hint: .5, 1
                 on_press: sm.current = 'recite_screen'
 
@@ -36,7 +36,7 @@
                 name: 'learn_screen'
 
 
-<LearnScreen>:
+<LearnScreen@Screen>:
     AnchorLayout:
         Label:
             size_hint: None, None
@@ -49,7 +49,7 @@
     Label:
         size_hint: None, None
         pos_hint: {'top': 1, 'right':.9}
-        text: 'Correct Digits: 0'
+        text: root.correct_digits
 
     BoxLayout:
         orientation: 'vertical'
@@ -69,7 +69,7 @@
             TextInput:
                 size_hint: None, None
                 height: '38dp'
-                text: '3.'
+                text: root.pi_output
                 readonly: True
                 multiline: False
                 font_size: 20
@@ -114,4 +114,4 @@
             Label:
                 text: ''
 
-<DigitButton>:
+<DigitButton@Button>:

@@ -1,39 +1,34 @@
 from kivy.app import App
 from kivy.uix.screenmanager import ScreenManager, Screen
-from kivy.properties import NumericProperty, ObjectProperty
+from kivy.properties import NumericProperty, StringProperty, ObjectProperty
 from kivy.lang import Builder
 from kivy.uix.floatlayout import FloatLayout
 from kivy.uix.button import Button
+from reciter import Reciter
 
 
 class RootWidget(FloatLayout):
-    '''This the class representing your root widget.
-       By default it is inherited from ScreenManager,
-       you can use any other layout/widget depending on your usage.
-    '''
     manager = ObjectProperty()
 
 
-class LearnScreen(Screen):
-    pass
-
-
 class ReciteScreen(Screen):
+    pi_output = StringProperty('3.')
+    correct_digits = StringProperty('Correct digits: 0')
+
+    def __init__(self, **kwargs):
+        super(ReciteScreen, self).__init__(**kwargs)
+        self.reciter = Reciter()
+
     def digit_pressed(self, digit):
-        print(digit)
-
-
-class DigitButton(Button):
-    pass
+        if self.reciter.check_next_digit(digit):
+            self.pi_output += digit
+            self.correct_digits = 'Correct digits: {}'.format(self.reciter.pos)
 
 
 class MainApp(App):
     def build(self):
-        '''Your app will be build from here.
-           Return your widget here.
-        '''
-
         return RootWidget()
+
 
 if __name__ == '__main__':
     MainApp().run()
