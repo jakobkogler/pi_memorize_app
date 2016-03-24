@@ -1,4 +1,6 @@
 #:kivy 1.9.1
+#:include src/recite_screen.kv
+#:include src/learn_screen.kv
 
 <RootWidget@FloatLayout>:
     id: rootWidget
@@ -38,83 +40,3 @@
 
             LearnScreen:
                 name: 'learn_screen'
-
-
-<LearnScreen@Screen>:
-    AnchorLayout:
-        Label:
-            size_hint: None, None
-            size: '150dp', '48dp'
-            text: 'Pi = 3.141592...'
-
-
-<ReciteScreen>:
-    orientation: 'vertical'
-
-    Label:
-        size_hint: None, .08
-        pos_hint: {'center_x': .25, 'top': .975}
-        text: root.correct_digits
-        font_size: self.height * .5
-
-    Label:
-        size_hint: None, .08
-        pos_hint: {'center_x': .75, 'top': .975}
-        text: root.wrong_attempts
-        font_size: self.height * .5
-
-    BoxLayout:
-        size_hint: .6, .12
-        pos_hint: {'center_x': .5, 'top': .85}
-
-        Label:
-            text: "Pi = "
-            font_size: self.height * .5
-
-        TextInput:
-            text: root.pi_output
-            readonly: True
-            multiline: False
-            font_size: self.height * .5
-            padding: [6, (self.height - self.line_height) / 2]
-
-    GridLayout:
-        size_hint: .7, .6
-        pos_hint: {'center_x': .5, 'y': .07}
-        cols: 3
-
-        DigitButton:
-            text: '7'
-        DigitButton:
-            text: '8'
-        DigitButton:
-            text: '9'
-        DigitButton:
-            text: '4'
-        DigitButton:
-            text: '5'
-        DigitButton:
-            text: '6'
-        DigitButton:
-            text: '1'
-        DigitButton:
-            text: '2'
-        DigitButton:
-            text: '3'
-        Label:
-            text: ''
-        DigitButton:
-            text: '0'
-        Label:
-            text: ''
-
-
-<DigitButton@Button>:
-    on_press: self.parent.parent.digit_pressed(self.text)
-    font_size: self.height * .4
-
-
-<WrongDigitImage@Image>:
-    size_hint: .01, .01
-    pos_hint: {'center_x': .5, 'center_y': .5}
-    source: 'media/X.png'
