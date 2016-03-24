@@ -11,16 +11,20 @@ class RootWidget(FloatLayout):
 
 class ReciteScreen(Screen):
     pi_output = StringProperty('3.')
-    correct_digits = StringProperty('Correct digits: 0')
+    correct_digits = StringProperty('')
 
     def __init__(self, **kwargs):
         super(ReciteScreen, self).__init__(**kwargs)
         self.reciter = Reciter()
+        self.update_correct_digits()
 
     def digit_pressed(self, digit):
         if self.reciter.check_next_digit(digit):
             self.pi_output += digit
-            self.correct_digits = 'Correct digits: {}'.format(self.reciter.pos)
+            self.update_correct_digits()
+
+    def update_correct_digits(self):
+        self.correct_digits = 'Correct digits: {}'.format(self.reciter.pos)
 
 
 class MainApp(App):
