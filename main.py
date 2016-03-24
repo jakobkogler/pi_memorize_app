@@ -1,12 +1,12 @@
 from kivy.app import App
-from kivy.uix.screenmanager import ScreenManager, Screen
-from kivy.properties import StringProperty, ObjectProperty
+from kivy.uix.screenmanager import Screen
+from kivy.properties import StringProperty
 from kivy.uix.floatlayout import FloatLayout
 from reciter import Reciter
 
 
 class RootWidget(FloatLayout):
-    manager = ObjectProperty()
+    pass
 
 
 class ReciteScreen(Screen):
