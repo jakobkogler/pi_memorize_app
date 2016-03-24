@@ -3,7 +3,7 @@ from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.properties import NumericProperty, ObjectProperty
 from kivy.lang import Builder
 from kivy.uix.floatlayout import FloatLayout
-#from kivy.uix.togglebutton import ToggleButton
+from kivy.uix.button import Button
 
 
 class RootWidget(FloatLayout):
@@ -12,6 +12,19 @@ class RootWidget(FloatLayout):
        you can use any other layout/widget depending on your usage.
     '''
     manager = ObjectProperty()
+
+
+class LearnScreen(Screen):
+    pass
+
+
+class ReciteScreen(Screen):
+    def digit_pressed(self, digit):
+        print(digit)
+
+
+class DigitButton(Button):
+    pass
 
 
 class MainApp(App):
