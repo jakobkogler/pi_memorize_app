@@ -1,8 +1,17 @@
 #:kivy 1.9.1
 
 <LearnScreen@Screen>:
-    AnchorLayout:
-        Label:
-            size_hint: None, None
-            size: '150dp', '48dp'
-            text: 'Pi = 3.141592...'
+    LearnScreenManager:
+        id: learn_screen_manager
+
+
+<LearnScreenManager@Carousel>:
+    id: carousel
+    loop: False
+
+<LearnInfo@FloatLayout>:
+    Label:
+        size_hint: .8, .8
+        pos_hint: {'center_x': .5, 'center_y': .5}
+        id: label
+        text: root.label_text
