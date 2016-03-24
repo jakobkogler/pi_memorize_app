@@ -5,9 +5,7 @@ from kivy.uix.popup import Popup
 from kivy.uix.image import Image
 from kivy.properties import StringProperty
 from kivy.animation import Animation
-from kivy.clock import Clock
 from reciter import Reciter
-from time import sleep
 
 
 class RootWidget(FloatLayout):
@@ -21,6 +19,7 @@ class ReciteScreen(Screen):
     def __init__(self, **kwargs):
         super(ReciteScreen, self).__init__(**kwargs)
         self.reciter = Reciter()
+        self.image = None
         self.update_correct_digits()
 
     def digit_pressed(self, digit):
@@ -28,17 +27,22 @@ class ReciteScreen(Screen):
             self.pi_output += digit
             self.update_correct_digits()
         else:
-            image = WrongDigitImage()
-            self.add_widget(image)
-            self.animate_grow(image)
-            Clock.schedule_once(lambda _: self.remove_widget(image), .5)
+            if not self.image:
+                self.image = WrongDigitImage()
+                self.add_widget(self.image)
+                self.animate_grow(self.image)
 
     def update_correct_digits(self):
         self.correct_digits = 'Correct digits: {}'.format(self.reciter.pos)
 
     def animate_grow(self, instance):
-        animation = Animation(size_hint=(.8, .8), duration=.5)
+        animation = Animation(size_hint=(1, 1), duration=.5)
+        animation.bind(on_complete=self.remove_wrong_digit_image)
         animation.start(instance)
+
+    def remove_wrong_digit_image(self, *_):
+        self.remove_widget(self.image)
+        self.image = None
 
 
 class WrongDigitImage(Image):
