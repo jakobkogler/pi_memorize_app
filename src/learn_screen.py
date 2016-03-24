@@ -1,7 +1,8 @@
 from kivy.uix.screenmanager import Screen
 from kivy.uix.floatlayout import FloatLayout
+from kivy.uix.label import Label
 from kivy.uix.carousel import Carousel
-from kivy.properties import StringProperty
+from kivy.properties import StringProperty, ObjectProperty
 from src.reciter import Reciter
 from pi_memorize.convert_to_major import ConverterMajorSystem
 
@@ -30,13 +31,22 @@ class LearnScreenManager(Carousel):
             cur_len = 15*len(self.slides)
             digits = self.reciter.pi[cur_len:cur_len+15]
             output = self.converter.convert(digits)
-            self.add_widget(LearnInfo(output))
+            self.add_widget(LearnInfo(output, cur_len))
 
 class LearnInfo(FloatLayout):
     """Displaying five new words."""
 
     label_text = StringProperty('')
+    grid = ObjectProperty(None)
 
-    def __init__(self, info, **kwargs):
+    def __init__(self, info, index, **kwargs):
         super(LearnInfo, self).__init__(**kwargs)
-        self.label_text = info[0].words
+        self.label_text = 'Digits {idx} to {idx2}:'.format(idx=index+1, idx2=index+15)
+
+        for line in info:
+            self.grid.add_widget(InfoLabel(text=line.digits))
+            self.grid.add_widget(InfoLabel(text=line.words))
+
+
+class InfoLabel(Label):
+    """Modified label for displaying pi-digits and the converted words."""

@@ -17,6 +17,7 @@
                 id: tb_learn
                 text: 'Learn Pi'
                 group: 'modus'
+                state: 'down'
                 size_hint: .5, 1
                 on_press:
                     sm.current = 'learn_screen'
@@ -26,7 +27,6 @@
                 id: tb_recite
                 text: 'Recite Pi'
                 group: 'modus'
-                state: 'down'
                 size_hint: .5, 1
                 on_press:
                     sm.current = 'recite_screen'
@@ -35,8 +35,8 @@
         ScreenManager:
             id: sm
 
-            ReciteScreen:
-                name: 'recite_screen'
-
             LearnScreen:
                 name: 'learn_screen'
+
+            ReciteScreen:
+                name: 'recite_screen'
