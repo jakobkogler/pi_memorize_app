@@ -10,11 +10,13 @@ class Reciter:
         self.current_calculated = 0
         self.pi = ''
         self.pos = 0
+        self.errors = 0
         self.compute_pi(100)
 
     def reset(self):
-        """Sets the number of correct digits back to zero."""
+        """Sets the number of correct digit and of the errors back to zero."""
         self.pos = 0
+        self.errors = 0
 
     def check_next_digit(self, digit):
         """Checks, if the next inputted digit is correct."""
@@ -23,7 +25,9 @@ class Reciter:
             if self.pos == self.current_calculated:
                 self.compute_pi(self.current_calculated + 100)
             return True
-        return False
+        else:
+            self.errors += 1
+            return False
 
     def compute_pi(self, precision):
         """Computes the digits of pi."""

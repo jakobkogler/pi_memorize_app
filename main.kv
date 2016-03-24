@@ -53,8 +53,14 @@
 
     Label:
         size_hint: None, .08
-        pos_hint: {'center_x': .75, 'top': .975}
+        pos_hint: {'center_x': .25, 'top': .975}
         text: root.correct_digits
+        font_size: self.height * .5
+
+    Label:
+        size_hint: None, .08
+        pos_hint: {'center_x': .75, 'top': .975}
+        text: root.wrong_attempts
         font_size: self.height * .5
 
     BoxLayout:

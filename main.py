@@ -16,15 +16,17 @@ class RootWidget(FloatLayout):
 class ReciteScreen(Screen):
     """Screen for reciting pi"""
 
-    pi_output = StringProperty('3.')
+    pi_output = StringProperty('')
     correct_digits = StringProperty('')
+    wrong_attempts = StringProperty('')
 
     def __init__(self, **kwargs):
         """Initialize everything and start calculating the first digits of pi."""
         super(ReciteScreen, self).__init__(**kwargs)
         self.reciter = Reciter()
         self.image = None
-        self.update_correct_digits()
+        self.allowed_errors = 3
+        self.reset()
 
     def digit_pressed(self, digit):
         """After pressing a digit on the screen, verify it and react to the result."""
@@ -33,6 +35,10 @@ class ReciteScreen(Screen):
                 self.pi_output += digit
                 self.update_correct_digits()
             else:
+                if self.reciter.errors > 3:
+                    self.reset()
+                else:
+                    self.update_wrong_attempts()
                 self.image = WrongDigitImage()
                 self.add_widget(self.image)
                 self.animate_grow(self.image)
@@ -40,6 +46,10 @@ class ReciteScreen(Screen):
     def update_correct_digits(self):
         """Display the current count of correct recited digits of pi."""
         self.correct_digits = 'Correct digits: {}'.format(self.reciter.pos)
+
+    def update_wrong_attempts(self):
+        """Displays the current number of wrong attempts."""
+        self.wrong_attempts = 'Allowed errors: {}'.format(self.allowed_errors - self.reciter.errors)
 
     def animate_grow(self, instance):
         """Make an animation that grows an image from 0 to 100."""
@@ -51,6 +61,13 @@ class ReciteScreen(Screen):
         """Remove the image, that is displayed when a wrong digits was inputted."""
         self.remove_widget(self.image)
         self.image = None
+
+    def reset(self):
+        """Reset the input field and the counts."""
+        self.reciter.reset()
+        self.update_correct_digits()
+        self.update_wrong_attempts()
+        self.pi_output = '3.'
 
 
 class WrongDigitImage(Image):
