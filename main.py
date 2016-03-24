@@ -1,9 +1,7 @@
 from kivy.app import App
 from kivy.uix.screenmanager import ScreenManager, Screen
-from kivy.properties import NumericProperty, StringProperty, ObjectProperty
-from kivy.lang import Builder
+from kivy.properties import StringProperty, ObjectProperty
 from kivy.uix.floatlayout import FloatLayout
-from kivy.uix.button import Button
 from reciter import Reciter
 
 

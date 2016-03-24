@@ -45,64 +45,59 @@
 
 
 <ReciteScreen>:
-    id: recite_screen
+    orientation: 'vertical'
+
     Label:
-        size_hint: None, None
-        pos_hint: {'top': 1, 'right':.9}
+        size_hint: None, .08
+        pos_hint: {'center_x': .75, 'top': .975}
         text: root.correct_digits
+        font_size: self.height * .5
 
     BoxLayout:
-        orientation: 'vertical'
+        size_hint: .6, .12
+        pos_hint: {'center_x': .5, 'top': .85}
 
-        BoxLayout:
-            #size_hint: None, None
-            #pos_hint: {'top': .8, 'right':.4}
-            pos_hint: {'center_x': .5}
-            center_y: self.width / 2
+        Label:
+            text: "Pi = "
+            font_size: self.height * .5
 
-            Label:
-                size_hint: None, None
-                #size: '150dp', '48dp'
-                text: "Pi = "
-                font_size: 20
+        TextInput:
+            text: root.pi_output
+            readonly: True
+            multiline: False
+            font_size: self.height * .5
+            padding: [6, (self.height - self.line_height) / 2]
 
-            TextInput:
-                size_hint: None, None
-                height: '38dp'
-                text: root.pi_output
-                readonly: True
-                multiline: False
-                font_size: 20
+    GridLayout:
+        size_hint: .7, .6
+        pos_hint: {'center_x': .5, 'y': .07}
+        cols: 3
 
-        GridLayout:
-            #size_hint: None, None
-            #pos_hint: {'top': .7, 'right':.9}
-            cols: 3
-
-            DigitButton:
-                text: '7'
-            DigitButton:
-                text: '8'
-            DigitButton:
-                text: '9'
-            DigitButton:
-                text: '4'
-            DigitButton:
-                text: '5'
-            DigitButton:
-                text: '6'
-            DigitButton:
-                text: '1'
-            DigitButton:
-                text: '2'
-            DigitButton:
-                text: '3'
-            Label:
-                text: ''
-            DigitButton:
-                text: '0'
-            Label:
-                text: ''
+        DigitButton:
+            text: '7'
+        DigitButton:
+            text: '8'
+        DigitButton:
+            text: '9'
+        DigitButton:
+            text: '4'
+        DigitButton:
+            text: '5'
+        DigitButton:
+            text: '6'
+        DigitButton:
+            text: '1'
+        DigitButton:
+            text: '2'
+        DigitButton:
+            text: '3'
+        Label:
+            text: ''
+        DigitButton:
+            text: '0'
+        Label:
+            text: ''
 
 <DigitButton@Button>:
-    on_press: self.parent.parent.parent.digit_pressed(self.text)
+    on_press: self.parent.parent.digit_pressed(self.text)
+    font_size: self.height * .4
