@@ -5,6 +5,7 @@ from kivy.uix.popup import Popup
 from kivy.uix.image import Image
 from kivy.properties import StringProperty
 from kivy.animation import Animation
+from kivy.core.audio import SoundLoader
 from reciter import Reciter
 
 
@@ -26,6 +27,7 @@ class ReciteScreen(Screen):
         self.reciter = Reciter()
         self.image = None
         self.allowed_errors = 3
+        self.error_sound = SoundLoader.load('media/error.wav')
         self.reset()
 
     def digit_pressed(self, digit):
@@ -42,6 +44,8 @@ class ReciteScreen(Screen):
                 self.image = WrongDigitImage()
                 self.add_widget(self.image)
                 self.animate_grow(self.image)
+                if self.error_sound:
+                    self.error_sound.play()
 
     def update_correct_digits(self):
         """Display the current count of correct recited digits of pi."""
