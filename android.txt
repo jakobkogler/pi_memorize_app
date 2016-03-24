@@ -1,0 +1,3 @@
+title=pi_memorize_app
+author=Jakob Kogler
+orientation=portrait
