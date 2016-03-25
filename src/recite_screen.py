@@ -65,6 +65,9 @@ class ReciteScreen(Screen):
             if display.highscore.in_top_10(self.correct):
                 popup = AskNamePopup(display, self.correct, datetime.now().strftime('%d.%m.%Y'), self.switch_to_highscore)
                 popup.open()
+            else:
+                popup = NotInTop10Popup()
+                popup.open()
 
     def reset(self):
         """Reset the input field and the counts."""
@@ -101,3 +104,8 @@ class AskNamePopup(Popup):
         self.display.load_highscore()
         self.dismiss()
         self.switch_to_highscore()
+
+
+class NotInTop10Popup(Popup):
+    """Tell the player that he didn't made it into the top 10."""
+    pass
