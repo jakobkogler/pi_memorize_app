@@ -78,6 +78,7 @@ class ReciteScreen(Screen):
         self.pi_output = '3.'
 
     def switch_to_highscore(self):
+        """Switch to the highscore screen."""
         self.parent.transition.direction = 'left'
         self.parent.current = 'highscore_screen'
 
@@ -91,14 +92,15 @@ class AskNamePopup(Popup):
     """Ask for the name of the player."""
 
     def __init__(self, display, correct, date, switch_to_highscore, **kwargs):
+        """Initializes everything."""
         super(AskNamePopup, self).__init__(**kwargs)
-
         self.display = display
         self.correct = correct
         self.date = date
         self.switch_to_highscore = switch_to_highscore
 
-    def add_time(self, name):
+    def add_result(self, name):
+        """Adds a result to the highscore and updates the highscore screen."""
         entry = (self.correct, name, self.date)
         self.display.highscore.add_result(*entry)
         self.display.load_highscore()

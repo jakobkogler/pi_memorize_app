@@ -16,7 +16,10 @@ class LearnScreen(Screen):
 
 
 class LearnScreenManager(Carousel):
+    """Carousel for displaying pi learning cards."""
+
     def __init__(self, **kwargs):
+        """Initialize everything and create the first few slides."""
         super(LearnScreenManager, self).__init__(**kwargs)
         self.reciter = Reciter()
         path = os.path.join(os.path.dirname(__file__),
@@ -25,10 +28,12 @@ class LearnScreenManager(Carousel):
         self.add_new_slides()
 
     def slide_changed(self):
+        """After the slides changed, check if it should generate more slides."""
         if self.index == len(self.slides) - 1:
             self.add_new_slides()
 
     def add_new_slides(self):
+        """Adds 10 new slides to the carousel."""
         self.reciter.compute_pi(self.reciter.current_calculated + 150)
         for i in range(10):
             cur_len = 15*len(self.slides)
