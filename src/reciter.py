@@ -31,5 +31,5 @@ class Reciter:
 
     def compute_pi(self, precision):
         """Computes the digits of pi."""
-        self.pi = self.computer.BBP(precision)[2:]
+        self.pi = self.computer.machin_euler(precision)[2:]
         self.current_calculated = precision
