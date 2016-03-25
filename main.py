@@ -2,6 +2,7 @@ from kivy.app import App
 from kivy.uix.floatlayout import FloatLayout
 from src.recite_screen import ReciteScreen
 from src.learn_screen import LearnScreen
+from src.highscore_screen import HighScoreScreen
 
 
 class RootWidget(FloatLayout):

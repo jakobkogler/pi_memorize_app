@@ -1,6 +1,7 @@
 #:kivy 1.9.1
 #:include src/recite_screen.kv
 #:include src/learn_screen.kv
+#:include src/highscore_screen.kv
 
 <RootWidget@FloatLayout>:
     id: rootWidget
@@ -18,7 +19,7 @@
                 text: 'Learn Pi'
                 group: 'modus'
                 state: 'down'
-                size_hint: .5, 1
+                size_hint: 1.0/3.0, 1
                 on_press:
                     sm.current = 'learn_screen'
                     sm.transition.direction = 'right'
@@ -27,13 +28,24 @@
                 id: tb_recite
                 text: 'Recite Pi'
                 group: 'modus'
-                size_hint: .5, 1
+                size_hint: 1.0/3.0, 1
                 on_press:
                     sm.current = 'recite_screen'
                     sm.transition.direction = 'left'
 
+            ToggleButton:
+                id: tb_highscore
+                text: 'HighScore'
+                group: 'modus'
+                size_hint: 1.0/3.0, 1
+                on_press:
+                    sm.current = 'highscore_screen'
+
         ScreenManager:
             id: sm
+
+            HighScoreScreen:
+                name: 'highscore_screen'
 
             LearnScreen:
                 name: 'learn_screen'

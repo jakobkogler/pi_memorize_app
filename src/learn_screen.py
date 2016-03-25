@@ -5,6 +5,7 @@ from kivy.uix.carousel import Carousel
 from kivy.properties import StringProperty, ObjectProperty
 from src.reciter import Reciter
 from pi_memorize.convert_to_major import ConverterMajorSystem
+import os
 
 
 class LearnScreen(Screen):
@@ -18,7 +19,9 @@ class LearnScreenManager(Carousel):
     def __init__(self, **kwargs):
         super(LearnScreenManager, self).__init__(**kwargs)
         self.reciter = Reciter()
-        self.converter = ConverterMajorSystem('../pi_memorize/major1000.csv')
+        path = os.path.join(os.path.dirname(__file__),
+                            '..', 'pi_memorize', 'major1000.csv')
+        self.converter = ConverterMajorSystem(path)
         self.add_new_slides()
 
     def slide_changed(self):
