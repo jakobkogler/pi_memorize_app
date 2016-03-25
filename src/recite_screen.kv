@@ -82,7 +82,7 @@
             size_hint: .7, .4
             pos_hint: {'center_x': .5, 'center_y': .8}
             text: 'Congratulations!\nYou made it into the top 10.\nType in your name:'
-            font_size: self.height / 6
+            font_size: 20
 
         TextInput:
             id: name_input
@@ -97,7 +97,7 @@
             size_hint: .6, .12
             pos_hint: {'center_x': .5, 'center_y': .2}
             on_press: root.add_result(name_input.text)
-            font_size: self.height / 2
+            font_size: 20
 
 
 <NotInTop10Popup@Popup>:
@@ -110,11 +110,11 @@
             size_hint: .7, .4
             pos_hint: {'center_x': .5, 'center_y': .8}
             text: "Sorry!\nYou didn't made it into the top 10.\nTry again."
-            font_size: self.height / 6
+            font_size: 20
 
         Button
             text: 'Go back!'
             size_hint: .6, .12
             pos_hint: {'center_x': .5, 'center_y': .2}
             on_press: root.dismiss()
-            font_size: self.height / 2
+            font_size: 20
