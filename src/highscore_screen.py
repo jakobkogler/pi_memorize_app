@@ -1,12 +1,15 @@
 from kivy.uix.screenmanager import Screen
 from kivy.uix.gridlayout import GridLayout
 from kivy.uix.label import Label
+from kivy.properties import ObjectProperty
 from src.highscore import HighScore
 import os
 
 
 class HighScoreScreen(Screen):
     """Screen displaying the current highscore."""
+
+    hs_display = ObjectProperty(None)
 
 
 class HighScoreDisplay(GridLayout):
@@ -22,7 +25,7 @@ class HighScoreDisplay(GridLayout):
         self.clear_widgets()
         highscore = self.highscore.highscore
         while len(highscore) < 10:
-            highscore.append(('-', '-', '-'))
+            highscore.append(['-', '-', '-'])
         for pos, (result, name, date) in enumerate(highscore[:10], start=1):
             self.add_widget(Label(text='{}.'.format(pos)))
             self.add_widget(Label(text=result))

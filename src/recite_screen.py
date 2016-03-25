@@ -1,9 +1,11 @@
 from kivy.uix.screenmanager import Screen
 from kivy.properties import StringProperty
 from kivy.uix.image import Image
+from kivy.uix.popup import Popup
 from kivy.animation import Animation
 from kivy.core.audio import SoundLoader
 from src.reciter import Reciter
+from datetime import datetime
 
 
 class ReciteScreen(Screen):
@@ -20,6 +22,7 @@ class ReciteScreen(Screen):
         self.image = None
         self.allowed_errors = 3
         self.error_sound = SoundLoader.load('media/error.wav')
+        self.correct = 0
         self.reset()
 
     def digit_pressed(self, digit):
@@ -29,15 +32,14 @@ class ReciteScreen(Screen):
                 self.pi_output += digit
                 self.update_correct_digits()
             else:
-                if self.reciter.errors > 3:
-                    self.reset()
-                else:
-                    self.update_wrong_attempts()
                 self.image = WrongDigitImage()
                 self.add_widget(self.image)
                 self.animate_grow(self.image)
                 if self.error_sound:
                     self.error_sound.play()
+                self.correct = self.reciter.pos
+                self.update_wrong_attempts()
+
 
     def update_correct_digits(self):
         """Display the current count of correct recited digits of pi."""
@@ -57,6 +59,12 @@ class ReciteScreen(Screen):
         """Remove the image, that is displayed when a wrong digits was inputted."""
         self.remove_widget(self.image)
         self.image = None
+        if self.reciter.errors > 3:
+            self.reset()
+            display = self.parent.hs_screen.hs_display
+            if display.highscore.in_top_10(self.correct):
+                popup = AskNamePopup(display, self.correct, datetime.now().strftime('%d.%m.%Y'), self.switch_to_highscore)
+                popup.open()
 
     def reset(self):
         """Reset the input field and the counts."""
@@ -66,7 +74,30 @@ class ReciteScreen(Screen):
         self.pi_output = '' # for reseting the cursor!
         self.pi_output = '3.'
 
+    def switch_to_highscore(self):
+        self.parent.transition.direction = 'left'
+        self.parent.current = 'highscore_screen'
+
 
 class WrongDigitImage(Image):
     """"Class representing the image 'X.png', that is displayed after a wrong input."""
     pass
+
+
+class AskNamePopup(Popup):
+    """Ask for the name of the player."""
+
+    def __init__(self, display, correct, date, switch_to_highscore, **kwargs):
+        super(AskNamePopup, self).__init__(**kwargs)
+
+        self.display = display
+        self.correct = correct
+        self.date = date
+        self.switch_to_highscore = switch_to_highscore
+
+    def add_time(self, name):
+        entry = (self.correct, name, self.date)
+        self.display.highscore.add_result(*entry)
+        self.display.load_highscore()
+        self.dismiss()
+        self.switch_to_highscore()

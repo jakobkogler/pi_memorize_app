@@ -21,8 +21,8 @@
                 state: 'down'
                 size_hint: 1.0/3.0, 1
                 on_press:
-                    sm.current = 'learn_screen'
                     sm.transition.direction = 'right'
+                    sm.current = 'learn_screen'
 
             ToggleButton:
                 id: tb_recite
@@ -30,8 +30,8 @@
                 group: 'modus'
                 size_hint: 1.0/3.0, 1
                 on_press:
+                    sm.transition.direction = 'left' if sm.current == 'learn_screen' else 'right'
                     sm.current = 'recite_screen'
-                    sm.transition.direction = 'left'
 
             ToggleButton:
                 id: tb_highscore
@@ -39,16 +39,19 @@
                 group: 'modus'
                 size_hint: 1.0/3.0, 1
                 on_press:
+                    sm.transition.direction = 'left'
                     sm.current = 'highscore_screen'
 
         ScreenManager:
             id: sm
-
-            HighScoreScreen:
-                name: 'highscore_screen'
+            hs_screen: hs_screen
 
             LearnScreen:
                 name: 'learn_screen'
 
             ReciteScreen:
                 name: 'recite_screen'
+
+            HighScoreScreen:
+                id: hs_screen
+                name: 'highscore_screen'
