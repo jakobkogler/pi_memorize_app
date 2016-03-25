@@ -48,6 +48,7 @@ class LearnInfo(FloatLayout):
     grid = ObjectProperty(None)
 
     def __init__(self, info, index, **kwargs):
+        """"Initialize everything and create 5 lines."""
         super(LearnInfo, self).__init__(**kwargs)
         self.label_text = 'Digits {idx} to {idx2}:'.format(idx=index+1, idx2=index+15)
 
