@@ -15,9 +15,8 @@ First you need to clone the project and fetch the submodule `pi_memorize`:
 
 ```
 git clone https://github.com/jakobkogler/pi_memorize_app.git
-cd pi_memorize
+cd pi_memorize_app
 git submodule update --init
-cd ..
 ```
 
 Then you can start the app with: 
