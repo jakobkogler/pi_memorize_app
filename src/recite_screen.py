@@ -59,7 +59,7 @@ class ReciteScreen(Screen):
         """Remove the image, that is displayed when a wrong digits was inputted."""
         self.remove_widget(self.image)
         self.image = None
-        if self.reciter.errors > 3:
+        if self.reciter.errors == 3:
             self.reset()
             display = self.parent.hs_screen.hs_display
             if display.highscore.in_top_10(self.correct):
